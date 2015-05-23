@@ -1,8 +1,11 @@
 package com.github.idclark.forgetmenot;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,7 +59,18 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        Activity mActivity;
+        RecyclerView mRecyclerView;
+        TaskAdapter taskAdapter;
+
         public PlaceholderFragment() {
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            this.mActivity = (Activity) activity;
+            setRetainInstance(true);
         }
 
         @Override
@@ -64,15 +78,28 @@ public class MainActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            RecyclerView recList = (RecyclerView) rootView.findViewById(R.id.cardList);
-            recList.setHasFixedSize(true);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            recList.setLayoutManager(linearLayoutManager);
-
-            TaskAdapter taskAdapter = new TaskAdapter(createList(30));
-            recList.setAdapter(taskAdapter);
+            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardList);
+            taskAdapter = new TaskAdapter(createList(30));
             return rootView;
+        }
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            mRecyclerView.setAdapter(taskAdapter);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            taskAdapter.SetOnItemClickListener(new TaskAdapter.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(View v, int position) {
+                    Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
+                    startActivity(detailIntent);
+
+                }
+            });
+
         }
 
         private List<Task> createList(int size) {

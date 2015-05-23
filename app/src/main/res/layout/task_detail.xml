@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+   <CheckBox
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:checked="false"
+       android:id="@+id/status"
+       android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is a todo task "
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:layout_toRightOf="@+id/status"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/edit_button"
+        fab:fab_size="mini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_icon="@drawable/ic_edit_black_48dp"
+        fab:fab_colorNormal="@color/white"
+        android:layout_toRightOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/due_date_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Due Date: "
+        android:layout_below="@+id/title"/>
+
+    <TextView
+        android:id="@+id/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is the notes section. Here we can put notes that are
+        associated with the task"
+        android:layout_below="@+id/title"/>
+
+</RelativeLayout>

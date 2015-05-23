@@ -15,6 +15,7 @@ import java.util.List;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
 
     private List<Task> taskList;
+    OnItemClickListener mItemClickListener;
 
     public TaskAdapter(List<Task> taskList) {
         this.taskList = taskList;
@@ -37,12 +38,20 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public TaskViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 
         View itemView = LayoutInflater.from(viewGroup.getContext()).
-                inflate(R.layout.taskcard_layout, viewGroup, false);
+                inflate(R.layout.tasklist_layout, viewGroup, false);
 
         return new TaskViewHolder(itemView);
     }
 
-    public static class TaskViewHolder extends RecyclerView.ViewHolder {
+    public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view , int position);
+    }
+
+    public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView mTitle;
         protected TextView mUpdated;
@@ -53,6 +62,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             mTitle = (TextView) view.findViewById(R.id.title);
             mUpdated = (TextView) view.findViewById(R.id.updated);
             mStatus = (CheckBox) view.findViewById(R.id.status);
+            view.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v, getPosition());
+            }
+        }
+
+
+
+
     }
 }
