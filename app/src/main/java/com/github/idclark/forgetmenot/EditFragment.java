@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class DetailActivityFragment extends Fragment {
+public class EditFragment extends Fragment {
 
-    public DetailActivityFragment() {
+    public EditFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.task_detail, container, false);
+        return inflater.inflate(R.layout.fragment_edit, container, false);
     }
 }

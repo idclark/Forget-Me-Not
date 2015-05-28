@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.getbase.floatingactionbutton.AddFloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +64,7 @@ public class MainActivity extends ActionBarActivity {
         Activity mActivity;
         RecyclerView mRecyclerView;
         TaskAdapter taskAdapter;
+        AddFloatingActionButton mFabView;
 
         public PlaceholderFragment() {
         }
@@ -79,7 +82,17 @@ public class MainActivity extends ActionBarActivity {
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardList);
-            taskAdapter = new TaskAdapter(createList(30));
+            mFabView = (AddFloatingActionButton) rootView.findViewById(R.id.normal_plus);
+
+            mFabView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent createTaskIntent = new Intent(v.getContext(), EditActivity.class);
+                    startActivity(createTaskIntent);
+                }
+            });
+            taskAdapter = new TaskAdapter(createList(5));
             return rootView;
         }
 
