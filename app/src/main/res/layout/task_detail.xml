@@ -16,33 +16,52 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:text="This is a todo task "
         android:gravity="center_vertical"
-        android:textSize="20dp"
-        android:layout_toRightOf="@+id/status"/>
+        android:textSize="20sp"
+        android:layout_toEndOf="@+id/status"/>
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/edit_button"
         fab:fab_size="mini"
+        android:paddingTop="-10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         fab:fab_icon="@drawable/ic_edit_black_48dp"
+        android:padding_left="10dp"
         fab:fab_colorNormal="@color/white"
-        android:layout_toRightOf="@+id/title" />
+        android:layout_toEndOf="@+id/title" />
+
 
     <TextView
         android:id="@+id/due_date_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="10dp"
+        android:drawableStart="@drawable/ic_insert_invitation_black_18dp"
         android:text="Due Date: "
-        android:layout_below="@+id/title"/>
+        android:layout_below="@+id/title"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/border_2"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"
+        android:layout_above="@+id/notes"/>
+
 
     <TextView
         android:id="@+id/notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is the notes section. Here we can put notes that are
-        associated with the task"
-        android:layout_below="@+id/title"/>
+        android:paddingTop="30dp"
+        android:drawableStart="@drawable/ic_format_align_left_black_18dp"
+        android:text="This is the notes section. Here we can put notes that are associated with the task"
+        android:layout_below="@+id/due_date_header"
+        android:textSize="20dp" />
 
 </RelativeLayout>
