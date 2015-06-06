@@ -19,12 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|right"
         fab:fab_plusIconColor="@color/half_black"
         fab:fab_colorNormal="@color/pink"
         fab:fab_colorPressed="@color/pink_pressed"
         android:layout_alignParentStart="false"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp" />
 
 </RelativeLayout>

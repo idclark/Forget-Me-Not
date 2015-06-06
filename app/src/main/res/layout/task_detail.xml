@@ -30,7 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         fab:fab_icon="@drawable/ic_edit_black_48dp"
-        android:padding_left="10dp"
         fab:fab_colorNormal="@color/white"
         android:layout_toEndOf="@+id/title" />
 

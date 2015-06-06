@@ -13,8 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
+import com.google.api.services.tasks.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +67,7 @@ public class MainActivity extends ActionBarActivity {
         RecyclerView mRecyclerView;
         TaskAdapter taskAdapter;
         AddFloatingActionButton mFabView;
+        CheckBox mCheckBox;
 
         public PlaceholderFragment() {
         }
@@ -92,7 +95,9 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(createTaskIntent);
                 }
             });
-            taskAdapter = new TaskAdapter(createList(5));
+
+            List<Task> result = new ArrayList<>();
+            taskAdapter = new TaskAdapter(result);
             return rootView;
         }
 
@@ -115,18 +120,5 @@ public class MainActivity extends ActionBarActivity {
 
         }
 
-        private List<Task> createList(int size) {
-            List<Task> result = new ArrayList<>();
-            for (int i = 1; i<=size; i++) {
-                Task task = new Task();
-                task.title = Task.TITLE_PREFIX + i;
-                task.updated = Task.UPDATED_PREFIX +i;
-                task.notes = task.NOTES_PREFIX + i;
-
-                result.add(task);
-
-            }
-            return result;
-        }
     }
 }

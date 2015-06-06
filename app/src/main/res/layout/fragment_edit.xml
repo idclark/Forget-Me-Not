@@ -15,11 +15,12 @@
 
     <EditText
         android:id="@+id/task_due_date"
-        android:inputType="datetime"
+        android:inputType="date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_insert_invitation_black_18dp"
         android:layout_below="@+id/task_title"
+        android:onClick="showDatePickerDialog"
         android:hint="Due date... "/>
 
     <EditText

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.google.api.services.tasks.model.Task;
+
 import java.util.List;
 
 /**
@@ -29,9 +31,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @Override
     public void onBindViewHolder(TaskViewHolder taskViewHolder, int i) {
         Task task = taskList.get(i);
-        taskViewHolder.mTitle.setText(task.title);
-        taskViewHolder.mUpdated.setText(task.updated);
-        taskViewHolder.mStatus.setChecked(false);
+        taskViewHolder.mTitle.setText(task.getTitle());
+        taskViewHolder.mUpdated.setText(task.getUpdated().toString());
+        if (task.getStatus().equals("completed")) {
+            taskViewHolder.mStatus.setChecked(true);
+        } else taskViewHolder.mStatus.setChecked(false);
+
     }
 
     @Override
@@ -71,9 +76,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 mItemClickListener.onItemClick(v, getPosition());
             }
         }
-
-
-
 
     }
 }

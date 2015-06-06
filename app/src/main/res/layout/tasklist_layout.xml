@@ -17,23 +17,29 @@
             android:gravity="center_vertical"
             android:textColor="@android:color/black"
             android:textSize="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/status" />
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/status" />
 
         <TextView
             android:id="@+id/updated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="July 7 11:38am"
+            android:textSize="15dp"
+            android:paddingTop="16dp"
             android:layout_below="@+id/title"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:paddingLeft="16dp" />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
             android:id="@+id/status"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/title" />
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_above="@+id/updated"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="8dp" />
 
 </RelativeLayout>
 </android.support.v7.widget.CardView>
