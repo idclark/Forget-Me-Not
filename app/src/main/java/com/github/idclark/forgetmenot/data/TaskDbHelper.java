@@ -28,10 +28,10 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                         TaskEntry.COLUMN_TASK_COMPLETED + "TEXT, " +
                         TaskEntry.COLUMN_TASK_NOTES + "TEXT, " +
                         TaskEntry.COLUMN_TASK_STATUS + "TEXT NOT NULL, " +
-                        TaskEntry.COLUMN_TASK_DUE + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_UPDATED + "TEXT, " +
+                        TaskEntry.COLUMN_TASK_DUE + "DATETIME, " +
+                        TaskEntry.COLUMN_TASK_UPDATED + "DATETIME, " +
                         TaskEntry.COLUMN_TASK_PARENT + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_DELETED + "TEXT, " +
+                        TaskEntry.COLUMN_TASK_DELETED + "BOOLEAN, " +
                         TaskEntry.COLUMN_TASK_SELFLINK + "TEXT, " +
                         TaskEntry.COLUMN_TASK_POSITION + "TEXT, " +
                         TaskEntry.COLUMN_TASK_HIDDEN + "TEXT" + ")";

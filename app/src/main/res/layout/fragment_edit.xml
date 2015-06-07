@@ -24,7 +24,7 @@
         android:hint="Due date... "/>
 
     <EditText
-        android:id="@+id/notes"
+        android:id="@+id/task_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/task_due_date"

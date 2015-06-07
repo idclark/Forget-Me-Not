@@ -14,8 +14,6 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-
 public class EditActivity extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
 
     @Override
@@ -41,8 +39,7 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
            case R.id.action_settings:
                return true;
            case R.id.action_save:
-               //TODO logic for saving to db
-               return true;
+               return false;
            case R.id.action_delete:
                startActivity(new Intent(this, MainActivity.class));
                return true;
@@ -65,4 +62,5 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
     }
+
 }
