@@ -20,21 +20,23 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+        //status must be either needsAction or completed
+
         final String CREATE_TASK_TABLE =
-                "CREATE TABLE " + TaskEntry.TABLE_NAME + " (" +
-                        TaskEntry._ID + " INTEGER PRIMARY KEY," +
-                        TaskEntry.COLUMN_TASK_ID + "TEXT NOT NULL, " +
-                        TaskEntry.COLUMN_TASK_TITLE + "TEXT NOT NULL, " +
-                        TaskEntry.COLUMN_TASK_COMPLETED + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_NOTES + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_STATUS + "TEXT NOT NULL, " +
-                        TaskEntry.COLUMN_TASK_DUE + "DATETIME, " +
-                        TaskEntry.COLUMN_TASK_UPDATED + "DATETIME, " +
-                        TaskEntry.COLUMN_TASK_PARENT + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_DELETED + "BOOLEAN, " +
-                        TaskEntry.COLUMN_TASK_SELFLINK + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_POSITION + "TEXT, " +
-                        TaskEntry.COLUMN_TASK_HIDDEN + "TEXT" + ")";
+                "CREATE TABLE " + TaskEntry.TABLE_NAME + " ( " +
+                        TaskEntry._ID + " INTEGER PRIMARY KEY, " +
+                        TaskEntry.COLUMN_TASK_ID + " TEXT NOT NULL, " +
+                        TaskEntry.COLUMN_TASK_TITLE + " TEXT NOT NULL, " +
+                        TaskEntry.COLUMN_TASK_COMPLETED + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_NOTES + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_STATUS + " TEXT NOT NULL, " +
+                        TaskEntry.COLUMN_TASK_DUE + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_UPDATED + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_PARENT + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_DELETED + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_SELFLINK + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_POSITION + " TEXT, " +
+                        TaskEntry.COLUMN_TASK_HIDDEN + " TEXT " + " ) ";
 
         db.execSQL(CREATE_TASK_TABLE);
     }

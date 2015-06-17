@@ -22,10 +22,11 @@ public class TaskTableController extends TaskDbHelper {
      */
     public boolean insertRow(Task task) {
         ContentValues values = new ContentValues();
-        values.put("_id",task.getId());
-        values.put("title",task.getTitle());
-        values.put("due", task.getDue().toString());
-        values.put("notes", task.getNotes());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_STATUS, task.getStatus());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_ID,task.getId());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_TITLE,task.getTitle());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_DUE, task.getDue().toString());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_NOTES, task.getNotes());
 
         SQLiteDatabase db = this.getWritableDatabase();
         boolean createSuccessful = db.insert(TaskContract.TaskEntry.TABLE_NAME, null, values) > 0;

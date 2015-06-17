@@ -10,16 +10,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.github.idclark.forgetmenot.data.TaskTableController;
+import com.google.api.services.tasks.model.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 public class EditActivity extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        EditFragment editFragment = (EditFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.edit_fragment);
     }
 
 
@@ -39,7 +48,10 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
            case R.id.action_settings:
                return true;
            case R.id.action_save:
-               return false;
+               EditFragment editFragment = (EditFragment)getSupportFragmentManager()
+                       .findFragmentById(R.id.edit_fragment);
+               insertNewTask(editFragment);
+               return true;
            case R.id.action_delete:
                startActivity(new Intent(this, MainActivity.class));
                return true;
@@ -61,6 +73,23 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    private void insertNewTask(EditFragment editFragment) {
+        Task task = new Task();
+        //TODO this is horribles and only for test
+        task.setId("TaskId" + Math.random());
+        task.setStatus(editFragment.getTaskStatus());
+        task.setTitle(editFragment.getTitleText());
+        task.setDue(editFragment.getTaskDueDate());
+        task.setNotes(editFragment.getTaskNotes());
+
+        boolean insertSuccess = new TaskTableController(this).insertRow(task);
+        if(insertSuccess){
+            Toast.makeText(this, "Task information was saved.", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Unable to save task information.", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

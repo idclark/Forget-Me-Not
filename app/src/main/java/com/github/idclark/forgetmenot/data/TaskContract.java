@@ -14,7 +14,7 @@ public class TaskContract {
     public static final class TaskEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "tasks";
-        public static final String COLUMN_TASK_ID = "_id";
+        public static final String COLUMN_TASK_ID = "id";
         public static final String COLUMN_TASK_TITLE = "title";
         public static final String COLUMN_TASK_UPDATED = "updated";
         public static final String COLUMN_TASK_SELFLINK = "selfLink";
