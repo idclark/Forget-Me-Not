@@ -16,10 +16,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
-import com.google.api.services.tasks.model.Task;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.github.idclark.forgetmenot.data.TaskTableController;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -34,7 +31,6 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,8 +92,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             });
 
-            List<Task> result = new ArrayList<>();
-            taskAdapter = new TaskAdapter(result);
+            taskAdapter = new TaskAdapter(new TaskTableController(getActivity()).getAllTasksForUser());
             return rootView;
         }
 
@@ -114,7 +109,6 @@ public class MainActivity extends ActionBarActivity {
                 public void onItemClick(View v, int position) {
                     Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
                     startActivity(detailIntent);
-
                 }
             });
 

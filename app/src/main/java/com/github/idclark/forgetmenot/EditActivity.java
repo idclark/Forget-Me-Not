@@ -21,7 +21,10 @@ import java.util.Locale;
 
 public class EditActivity extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
 
-
+    public static String EXTRA_TITLE = "com.github.idclark.TITLE";
+    public static String EXTRA_DUE = "com.github.idclark.DUE";
+    public static String EXTRA_NOTES = "com.github.idclark.NOTES";
+    public static String EXTRA_STATUS = "com.github.idclark.STATUS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,13 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
         setContentView(R.layout.activity_edit);
         EditFragment editFragment = (EditFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_fragment);
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            editFragment.setTaskStatus(data.getBoolean(EXTRA_STATUS));
+            editFragment.setTaskTitle(data.getString(EXTRA_TITLE));
+            editFragment.setmTaskNotes(data.getString(EXTRA_NOTES));
+            editFragment.setmDueDate(data.getString(EXTRA_DUE));
+        }
     }
 
 
@@ -50,7 +60,8 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
            case R.id.action_save:
                EditFragment editFragment = (EditFragment)getSupportFragmentManager()
                        .findFragmentById(R.id.edit_fragment);
-               insertNewTask(editFragment);
+               insertEditedTask(editFragment);
+               startActivity(new Intent(this, MainActivity.class));
                return true;
            case R.id.action_delete:
                startActivity(new Intent(this, MainActivity.class));
@@ -75,19 +86,28 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
         newFragment.show(getFragmentManager(), "datePicker");
     }
 
-    private void insertNewTask(EditFragment editFragment) {
+    /**
+     * This is used in two contexts,
+     * 1. If we create a new Task from the cardview, we go to an empty editFragment
+     * 2. If we edit an existing task from the DetailFragment, the editFragment will be populated
+     * with the existing task fields.
+     * @param editFragment
+     */
+    private void insertEditedTask(EditFragment editFragment) {
         Task task = new Task();
-        //TODO this is horribles and only for test
-        task.setId("TaskId" + Math.random());
+        if ( task.getId() == null) {
+            //TODO this is horribles and only for test
+            task.setId("TaskId" + Math.random());
+        }
         task.setStatus(editFragment.getTaskStatus());
         task.setTitle(editFragment.getTitleText());
         task.setDue(editFragment.getTaskDueDate());
         task.setNotes(editFragment.getTaskNotes());
 
         boolean insertSuccess = new TaskTableController(this).insertRow(task);
-        if(insertSuccess){
+        if (insertSuccess) {
             Toast.makeText(this, "Task information was saved.", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             Toast.makeText(this, "Unable to save task information.", Toast.LENGTH_SHORT).show();
         }
     }

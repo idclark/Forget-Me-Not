@@ -36,6 +36,28 @@ public class EditFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_edit, container, false);
     }
 
+    public void setTaskStatus(Boolean status) {
+        mCheckBox = (CheckBox) getActivity().findViewById(R.id.edit_status);
+        if (status) {
+            mCheckBox.setChecked(true);
+        }
+    }
+
+    public void setTaskTitle(String title) {
+        mTitleText = (EditText) getActivity().findViewById(R.id.task_title);
+        mTitleText.setText(title);
+    }
+
+    public void setmTaskNotes(String notes) {
+        mTaskNotes = (EditText) getActivity().findViewById(R.id.task_notes);
+        mTaskNotes.setText(notes);
+    }
+
+    public void setmDueDate(String dueDate) {
+        mDueDate = (EditText) getActivity().findViewById(R.id.task_due_date);
+        //TODO do some date formatting here
+        mDueDate.setText(dueDate);
+    }
     public String getTaskStatus() {
         mCheckBox = (CheckBox) getActivity().findViewById(R.id.edit_status);
         if (mCheckBox.isChecked()) {
