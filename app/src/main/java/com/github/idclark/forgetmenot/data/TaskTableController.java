@@ -47,15 +47,19 @@ public class TaskTableController extends TaskDbHelper {
         List<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(QUERY_ALL_RECORDS, null);
-        while (cursor.moveToNext()) {
-            Task task = new Task();
-            int TaskId = cursor.getColumnIndex(TaskEntry.COLUMN_TASK_ID);
-            task.setId(cursor.getString(TaskId));
-            task.setTitle(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_TITLE)));
-            task.setDue(new DateTime(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_DUE))));
-            task.setNotes(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_NOTES)));
-            taskList.add(task);
-        }
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                Task task = new Task();
+                int TaskId = cursor.getColumnIndex(TaskEntry.COLUMN_TASK_ID);
+                task.setId(cursor.getString(TaskId));
+                task.setTitle(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_TITLE)));
+                task.setDue(new DateTime(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_DUE))));
+                task.setNotes(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_NOTES)));
+                task.setStatus(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_STATUS)));
+                taskList.add(task);
+            }
+        } else return taskList;
+        db.close();
         return taskList;
     }
 

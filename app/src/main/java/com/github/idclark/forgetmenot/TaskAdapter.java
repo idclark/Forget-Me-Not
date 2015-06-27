@@ -32,7 +32,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(TaskViewHolder taskViewHolder, int i) {
         Task task = taskList.get(i);
         taskViewHolder.mTitle.setText(task.getTitle());
-        taskViewHolder.mUpdated.setText(task.getUpdated().toString());
+        taskViewHolder.mDue.setText(task.getDue().toString());
         if (task.getStatus().equals("completed")) {
             taskViewHolder.mStatus.setChecked(true);
         } else taskViewHolder.mStatus.setChecked(false);
@@ -59,13 +59,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView mTitle;
-        protected TextView mUpdated;
+        protected TextView mDue;
         protected CheckBox mStatus;
 
         public TaskViewHolder(View view) {
             super(view);
             mTitle = (TextView) view.findViewById(R.id.title);
-            mUpdated = (TextView) view.findViewById(R.id.updated);
+            mDue = (TextView) view.findViewById(R.id.due);
             mStatus = (CheckBox) view.findViewById(R.id.status);
             view.setOnClickListener(this);
         }
