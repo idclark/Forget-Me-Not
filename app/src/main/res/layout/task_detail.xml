@@ -45,6 +45,13 @@
         android:layout_below="@+id/title"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/date_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/due_date_header"
+        android:textSize="20sp"/>
+
     <View
         android:id="@+id/border_2"
         android:layout_width="fill_parent"

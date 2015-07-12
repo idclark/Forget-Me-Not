@@ -48,8 +48,8 @@ public class DetailFragment extends Fragment {
         mTitleView.setText(detailTask.getTitle());
         mNotesView = (TextView) rootView.findViewById(R.id.notes);
         mNotesView.setText(detailTask.getNotes());
-        //mDueDate = (TextView) rootView.findViewById(R.id.task);
-        //mDueDate.setText(detailTask.getDue().toString());
+        mDueDate = (TextView) rootView.findViewById(R.id.date_string);
+        mDueDate.setText(detailTask.getDue().toString());
         mCheckBox = (CheckBox) rootView.findViewById(R.id.status);
         detailTask.getStatus();
         if (detailTask.getStatus().equals("completed")) {
@@ -61,16 +61,9 @@ public class DetailFragment extends Fragment {
         mFabView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTitleView = (TextView) getActivity().findViewById(R.id.task_title);
                 String title = mTitleView.getText().toString();
-
-                mNotesView = (TextView) getActivity().findViewById(R.id.notes);
                 String notes = mNotesView.getText().toString();
-
-                mDueDate = (TextView) getActivity().findViewById(R.id.task_due_date);
                 String dueDate = mDueDate.getText().toString();
-
-                mCheckBox = (CheckBox) getActivity().findViewById(R.id.checkbox);
                 Boolean status = mCheckBox.isChecked();
 
                 Intent editTaskIntent = new Intent(v.getContext(), EditActivity.class);
