@@ -1,7 +1,7 @@
 package com.github.idclark.forgetmenot;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,8 +13,10 @@ public class DetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         if (savedInstanceState == null) {
+            DetailFragment detailFragment = new DetailFragment();
+            detailFragment.setArguments(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.task_detail_container, new DetailFragment())
+                    .add(R.id.task_detail_container, detailFragment)
                     .commit();
         }
     }

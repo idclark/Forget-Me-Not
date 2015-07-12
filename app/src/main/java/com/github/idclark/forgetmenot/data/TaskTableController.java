@@ -58,14 +58,19 @@ public class TaskTableController extends TaskDbHelper {
                 task.setStatus(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_STATUS)));
                 taskList.add(task);
             }
-        } else return taskList;
+        } else {
+            cursor.close();
+            db.close();
+            return taskList;
+        }
+        cursor.close();
         db.close();
         return taskList;
     }
 
-    public Task getTaskByID(Integer Id) {
+    public Task getTaskByID(String Id) {
         final String SINGLE_TASK_QUERY = "SELECT * FROM " + TaskEntry.TABLE_NAME +
-                " WHERE " + TaskEntry._ID + " = " + Id;
+                " WHERE " + TaskEntry.COLUMN_TASK_ID +  "=" +"'"+ Id+"'"+";";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(SINGLE_TASK_QUERY, null);
 
@@ -74,9 +79,11 @@ public class TaskTableController extends TaskDbHelper {
 
             task.setId(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_ID)));
             task.setTitle(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_TITLE)));
+            task.setStatus(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_STATUS)));
             task.setDue(new DateTime(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_DUE))));
             task.setNotes(cursor.getString(cursor.getColumnIndex(TaskEntry.COLUMN_TASK_NOTES)));
         }
+        cursor.close();
         return task;
     }
 }

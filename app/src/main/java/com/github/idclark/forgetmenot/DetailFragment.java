@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.github.idclark.forgetmenot.data.TaskTableController;
+import com.google.api.services.tasks.model.Task;
 
 
 /**
@@ -36,21 +38,39 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        TaskTableController controller = new TaskTableController(getActivity());
+        String taskID = getArguments().getString("TASK_ID");
+        Task detailTask = controller.getTaskByID(taskID);
+        detailTask.getId();
+        detailTask.getTitle();
         View rootView = inflater.inflate(R.layout.task_detail, container, false);
+        mTitleView = (TextView) rootView.findViewById(R.id.title);
+        mTitleView.setText(detailTask.getTitle());
+        mNotesView = (TextView) rootView.findViewById(R.id.notes);
+        mNotesView.setText(detailTask.getNotes());
+        //mDueDate = (TextView) rootView.findViewById(R.id.task);
+        //mDueDate.setText(detailTask.getDue().toString());
+        mCheckBox = (CheckBox) rootView.findViewById(R.id.status);
+        detailTask.getStatus();
+        if (detailTask.getStatus().equals("completed")) {
+            mCheckBox.setChecked(true);
+        } else
+        mCheckBox.setChecked(false);
+
         mFabView = (FloatingActionButton) rootView.findViewById(R.id.edit_button);
         mFabView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTitleView = (TextView) v.findViewById(R.id.task_title);
+                mTitleView = (TextView) getActivity().findViewById(R.id.task_title);
                 String title = mTitleView.getText().toString();
 
-                mNotesView = (TextView) v.findViewById(R.id.notes);
+                mNotesView = (TextView) getActivity().findViewById(R.id.notes);
                 String notes = mNotesView.getText().toString();
 
-                mDueDate = (TextView) v.findViewById(R.id.task_due_date);
+                mDueDate = (TextView) getActivity().findViewById(R.id.task_due_date);
                 String dueDate = mDueDate.getText().toString();
 
-                mCheckBox = (CheckBox) v.findViewById(R.id.checkbox);
+                mCheckBox = (CheckBox) getActivity().findViewById(R.id.checkbox);
                 Boolean status = mCheckBox.isChecked();
 
                 Intent editTaskIntent = new Intent(v.getContext(), EditActivity.class);

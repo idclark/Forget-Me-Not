@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.github.idclark.forgetmenot.data.TaskTableController;
@@ -64,6 +65,7 @@ public class MainActivity extends ActionBarActivity {
         TaskAdapter taskAdapter;
         AddFloatingActionButton mFabView;
         CheckBox mCheckBox;
+        TextView m_ID;
 
         public PlaceholderFragment() {
         }
@@ -107,7 +109,9 @@ public class MainActivity extends ActionBarActivity {
 
                 @Override
                 public void onItemClick(View v, int position) {
+                    m_ID = (TextView) v.findViewById(R.id._task_id);
                     Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
+                    detailIntent.putExtra("TASK_ID", m_ID.getText().toString());
                     startActivity(detailIntent);
                 }
             });
