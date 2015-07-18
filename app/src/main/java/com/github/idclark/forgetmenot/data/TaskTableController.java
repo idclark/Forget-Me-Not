@@ -27,7 +27,7 @@ public class TaskTableController extends TaskDbHelper {
      * @param task
      * @return
      */
-    public boolean insertRow(Task task) {
+    public boolean insertNewRow(Task task) {
         ContentValues values = new ContentValues();
         values.put(TaskContract.TaskEntry.COLUMN_TASK_STATUS, task.getStatus());
         values.put(TaskContract.TaskEntry.COLUMN_TASK_ID,task.getId());
@@ -39,6 +39,20 @@ public class TaskTableController extends TaskDbHelper {
         boolean createSuccessful = db.insert(TaskContract.TaskEntry.TABLE_NAME, null, values) > 0;
         db.close();
         return createSuccessful;
+    }
+
+    public boolean updateExistingTask(Task task) {
+        ContentValues values = new ContentValues();
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_STATUS, task.getStatus());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_ID,task.getId());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_TITLE, task.getTitle());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_DUE, task.getDue().toString());
+        values.put(TaskContract.TaskEntry.COLUMN_TASK_NOTES, task.getNotes());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        boolean updateSuccessful = db.update(TaskEntry.TABLE_NAME, values, TaskEntry.COLUMN_TASK_ID + "=" + "'"+ task.getId()+"'"+";", null) > 0;
+        db.close();
+        return updateSuccessful;
     }
 
     public List<Task> getAllTasksForUser() {
@@ -86,4 +100,10 @@ public class TaskTableController extends TaskDbHelper {
         cursor.close();
         return task;
     }
+
+    public boolean deletTaskByID(String Id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TaskEntry.TABLE_NAME, TaskEntry.COLUMN_TASK_ID + "=" + Id, null) > 0;
+    }
+    //TODO bug causes new task to be written
 }

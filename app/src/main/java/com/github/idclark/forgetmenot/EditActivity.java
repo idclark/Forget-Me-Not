@@ -25,6 +25,7 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
     public static String EXTRA_DUE = "com.github.idclark.DUE";
     public static String EXTRA_NOTES = "com.github.idclark.NOTES";
     public static String EXTRA_STATUS = "com.github.idclark.STATUS";
+    public static String EXTRA_ID = "com.github.idclark.ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
                 .findFragmentById(R.id.edit_fragment);
         Bundle data = getIntent().getExtras();
         if (data != null) {
+            editFragment.setTaskID(data.getString(EXTRA_ID));
             editFragment.setTaskStatus(data.getBoolean(EXTRA_STATUS));
             editFragment.setTaskTitle(data.getString(EXTRA_TITLE));
             editFragment.setmTaskNotes(data.getString(EXTRA_NOTES));
@@ -60,7 +62,7 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
            case R.id.action_save:
                EditFragment editFragment = (EditFragment)getSupportFragmentManager()
                        .findFragmentById(R.id.edit_fragment);
-               insertEditedTask(editFragment);
+               createOrUpdateTask(editFragment);
                startActivity(new Intent(this, MainActivity.class));
                return true;
            case R.id.action_delete:
@@ -93,23 +95,37 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
      * with the existing task fields.
      * @param editFragment
      */
-    private void insertEditedTask(EditFragment editFragment) {
+    //TODO, this method does too much, break it up for seperate methods to write new rows
+    //and update existing rows
+    private void createOrUpdateTask(EditFragment editFragment) {
         Task task = new Task();
-        if ( task.getId() == null) {
+        if (editFragment.getTaskID().length() < 1) {
             //TODO this is horribles and only for test
             task.setId("TaskId" + Math.random());
-        }
         task.setStatus(editFragment.getTaskStatus());
         task.setTitle(editFragment.getTitleText());
+        //TODO this breaks with an existing datetime string, mm/dd/yyyy HH:mm:sss z
         task.setDue(editFragment.getTaskDueDate());
         task.setNotes(editFragment.getTaskNotes());
 
-        boolean insertSuccess = new TaskTableController(this).insertRow(task);
+        boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
         if (insertSuccess) {
             Toast.makeText(this, "Task information was saved.", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Unable to save task information.", Toast.LENGTH_SHORT).show();
         }
+    } else {
+            task.setId(editFragment.getTaskID());
+            task.setStatus(editFragment.getTaskStatus());
+            task.setTitle(editFragment.getTitleText());
+            task.setDue(editFragment.getTaskDueDate());
+            task.setNotes(editFragment.getTaskNotes());
+            boolean updateSuccess = new TaskTableController(this).updateExistingTask(task);
+            if (updateSuccess) {
+                Toast.makeText(this, "Task information was updated.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Unable to update task information.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
-
 }

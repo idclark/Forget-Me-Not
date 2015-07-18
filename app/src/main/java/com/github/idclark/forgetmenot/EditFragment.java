@@ -26,6 +26,7 @@ public class EditFragment extends Fragment {
     EditText mTitleText;
     EditText mDueDate;
     EditText mTaskNotes;
+    String taskID;
 
     public EditFragment() {
     }
@@ -36,6 +37,9 @@ public class EditFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_edit, container, false);
     }
 
+    public void setTaskID(String id) {
+        taskID = id;
+    }
     public void setTaskStatus(Boolean status) {
         mCheckBox = (CheckBox) getActivity().findViewById(R.id.edit_status);
         if (status) {
@@ -58,6 +62,11 @@ public class EditFragment extends Fragment {
         //TODO do some date formatting here
         mDueDate.setText(dueDate);
     }
+
+    public String getTaskID() {
+        return taskID;
+    }
+
     public String getTaskStatus() {
         mCheckBox = (CheckBox) getActivity().findViewById(R.id.edit_status);
         if (mCheckBox.isChecked()) {
@@ -65,6 +74,7 @@ public class EditFragment extends Fragment {
         } else return "needsAction";
 
     }
+
     public String getTitleText() {
         mTitleText = (EditText) getActivity().findViewById(R.id.task_title);
         return mTitleText.getText().toString();

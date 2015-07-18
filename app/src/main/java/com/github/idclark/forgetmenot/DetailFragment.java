@@ -23,6 +23,7 @@ public class DetailFragment extends Fragment {
     public static String EXTRA_DUE = "com.github.idclark.DUE";
     public static String EXTRA_NOTES = "com.github.idclark.NOTES";
     public static String EXTRA_STATUS = "com.github.idclark.STATUS";
+    public static String EXTRA_ID = "com.github.idclark.ID";
 
     FloatingActionButton mFabView;
     TextView mTitleView;
@@ -39,7 +40,7 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         TaskTableController controller = new TaskTableController(getActivity());
-        String taskID = getArguments().getString("TASK_ID");
+        final String taskID = getArguments().getString("TASK_ID");
         Task detailTask = controller.getTaskByID(taskID);
         detailTask.getId();
         detailTask.getTitle();
@@ -71,6 +72,7 @@ public class DetailFragment extends Fragment {
                 editTaskIntent.putExtra(EXTRA_DUE, dueDate);
                 editTaskIntent.putExtra(EXTRA_NOTES, notes);
                 editTaskIntent.putExtra(EXTRA_STATUS, status);
+                editTaskIntent.putExtra(EXTRA_ID, taskID);
                 startActivity(editTaskIntent);
             }
         });

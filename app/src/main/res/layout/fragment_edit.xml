@@ -22,7 +22,7 @@
 
     <EditText
         android:id="@+id/task_due_date"
-        android:inputType="date"
+        android:inputType="datetime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_insert_invitation_black_18dp"
