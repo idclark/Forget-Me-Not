@@ -103,7 +103,7 @@ public class TaskTableController extends TaskDbHelper {
 
     public boolean deletTaskByID(String Id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TaskEntry.TABLE_NAME, TaskEntry.COLUMN_TASK_ID + "=" + Id, null) > 0;
+        return db.delete(TaskEntry.TABLE_NAME, TaskEntry.COLUMN_TASK_ID + "=" + "'"+Id+"'"+";", null) > 0;
     }
     //TODO bug causes new task to be written
 }

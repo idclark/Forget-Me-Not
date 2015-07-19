@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
@@ -64,7 +63,6 @@ public class MainActivity extends ActionBarActivity {
         RecyclerView mRecyclerView;
         TaskAdapter taskAdapter;
         AddFloatingActionButton mFabView;
-        CheckBox mCheckBox;
         TextView m_ID;
 
         public PlaceholderFragment() {
@@ -115,7 +113,6 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(detailIntent);
                 }
             });
-
         }
 
     }
