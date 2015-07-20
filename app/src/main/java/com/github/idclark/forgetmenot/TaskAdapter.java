@@ -51,8 +51,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
                 if (deleteSuccess) {
                     Toast.makeText(v.getContext(), "Task was successfully deleted", Toast.LENGTH_SHORT).show();
-                    int index = taskList.indexOf(task);
-                    notifyItemRemoved(index + 1);
+                    notifyDataSetChanged();
 
                 } else {
                     Toast.makeText(v.getContext(), "Unable to delete Task", Toast.LENGTH_SHORT).show();

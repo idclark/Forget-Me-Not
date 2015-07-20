@@ -99,22 +99,7 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
     //and update existing rows
     private void createOrUpdateTask(EditFragment editFragment) {
         Task task = new Task();
-        if (editFragment.getTaskID().length() < 1) {
-            //TODO this is horribles and only for test
-            task.setId("TaskId" + Math.random());
-        task.setStatus(editFragment.getTaskStatus());
-        task.setTitle(editFragment.getTitleText());
-        //TODO this breaks with an existing datetime string, mm/dd/yyyy HH:mm:sss z
-        task.setDue(editFragment.getTaskDueDate());
-        task.setNotes(editFragment.getTaskNotes());
-
-        boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
-        if (insertSuccess) {
-            Toast.makeText(this, "Task information was saved.", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Unable to save task information.", Toast.LENGTH_SHORT).show();
-        }
-    } else {
+        if (editFragment.getTaskID() != null) {
             task.setId(editFragment.getTaskID());
             task.setStatus(editFragment.getTaskStatus());
             task.setTitle(editFragment.getTitleText());
@@ -125,6 +110,22 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
                 Toast.makeText(this, "Task information was updated.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Unable to update task information.", Toast.LENGTH_SHORT).show();
+            }
+
+    } else {
+            //TODO this is horribles and only for test
+            task.setId("TaskId" + Math.random());
+            task.setStatus(editFragment.getTaskStatus());
+            task.setTitle(editFragment.getTitleText());
+            //TODO this breaks with an existing datetime string, mm/dd/yyyy HH:mm:sss z
+            task.setDue(editFragment.getTaskDueDate());
+            task.setNotes(editFragment.getTaskNotes());
+
+            boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
+            if (insertSuccess) {
+                Toast.makeText(this, "Task information was saved.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Unable to save task information.", Toast.LENGTH_SHORT).show();
             }
         }
     }
