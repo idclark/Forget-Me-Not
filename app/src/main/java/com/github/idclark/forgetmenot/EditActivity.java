@@ -2,6 +2,7 @@ package com.github.idclark.forgetmenot;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.github.idclark.forgetmenot.data.TaskTableController;
@@ -19,7 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class EditActivity extends ActionBarActivity implements DatePickerDialog.OnDateSetListener{
+public class EditActivity extends ActionBarActivity implements DatePickerDialog.OnDateSetListener
+                                              , TimePickerDialog.OnTimeSetListener{
 
     public static String EXTRA_TITLE = "com.github.idclark.TITLE";
     public static String EXTRA_DUE = "com.github.idclark.DUE";
@@ -86,6 +89,21 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hour, int minute) {
+        String format = "HH:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(hour, minute);
+        String date = ((EditText) findViewById(R.id.task_due_date)).getText().toString();
+        ((EditText) findViewById(R.id.task_due_date)).setText(date + " " + sdf.format(calendar.getTime()));
+    }
+
+    public void showTimePickerDialog(View v) {
+        TimePickerFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
 
     /**

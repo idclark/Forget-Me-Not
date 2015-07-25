@@ -16,7 +16,7 @@
        android:id="@+id/task_title"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:hint="Task... "
+       android:hint="@string/task_title_hint"
        android:layout_alignParentTop="true"
        android:layout_toEndOf="@+id/edit_status" />
 
@@ -28,14 +28,22 @@
         android:drawableStart="@drawable/ic_insert_invitation_black_18dp"
         android:layout_below="@+id/task_title"
         android:onClick="showDatePickerDialog"
-        android:hint="Due date... "/>
+        android:hint="@string/date_due_hint"/>
+
+    <EditText
+        android:id="@+id/time_due"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_due_date"
+        android:onClick="showTimePickerDialog"
+        android:hint="@string/time_due_hint"/>
 
     <EditText
         android:id="@+id/task_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/task_due_date"
+        android:layout_below="@+id/time_due"
         android:drawableStart="@drawable/ic_format_align_left_black_18dp"
-        android:hint="Notes ... "/>
+        android:hint="@string/notes_hint"/>
 
 </RelativeLayout>
