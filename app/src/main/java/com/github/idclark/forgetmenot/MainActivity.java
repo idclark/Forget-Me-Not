@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -113,6 +114,10 @@ public class MainActivity extends ActionBarActivity {
                     startActivity(detailIntent);
                 }
             });
+
+            ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(taskAdapter);
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+            itemTouchHelper.attachToRecyclerView(mRecyclerView);
         }
 
     }

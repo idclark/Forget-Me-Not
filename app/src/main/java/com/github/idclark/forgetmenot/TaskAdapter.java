@@ -13,6 +13,7 @@ import com.google.api.services.tasks.model.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -20,7 +21,8 @@ import java.util.Locale;
 /**
  * Created by idclark on 5/13/15.
  */
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder>
+                         implements ItemTouchHelperAdapter {
 
     private List<Task> taskList;
     OnItemClickListener mItemClickListener;
@@ -68,6 +70,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 inflate(R.layout.tasklist_layout, viewGroup, false);
 
         return new TaskViewHolder(itemView);
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        taskList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onItemMove(int from, int to) {
+        Collections.swap(taskList, from, to);
+        notifyItemMoved(from, to);
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
