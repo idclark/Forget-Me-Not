@@ -1,5 +1,6 @@
 package com.github.idclark.forgetmenot;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,9 +27,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     private List<Task> taskList;
     OnItemClickListener mItemClickListener;
+    private Context mContext;
 
-    public TaskAdapter(List<Task> taskList) {
+    public TaskAdapter(List<Task> taskList, Context context) {
         this.taskList = taskList;
+        this.mContext = context;
     }
 
     @Override
@@ -42,25 +45,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         taskViewHolder.m_ID.setText(task.getId());
         taskViewHolder.mTitle.setText(task.getTitle());
         taskViewHolder.mDue.setText(task.getDue().toString());
-        if (task.getStatus().equals("completed")) {
+        if (task.getStatus().equals("complete")) {
             taskViewHolder.mStatus.setChecked(true);
         } else taskViewHolder.mStatus.setChecked(false);
-
-        taskViewHolder.mDeleteIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean deleteSuccess = new TaskTableController(v.getContext()).deletTaskByID(task.getId());
-
-                if (deleteSuccess) {
-                    Toast.makeText(v.getContext(), "Task was successfully deleted", Toast.LENGTH_SHORT).show();
-                    notifyDataSetChanged();
-
-                } else {
-                    Toast.makeText(v.getContext(), "Unable to delete Task", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
     }
 
     @Override
@@ -74,8 +61,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onItemDismiss(int position) {
-        taskList.remove(position);
-        notifyItemRemoved(position);
+        Task task = taskList.get(position);
+        String id = task.getId();
+        boolean deleteSuccess = new TaskTableController(mContext).deletTaskByID(id);
+        if (deleteSuccess) {
+            taskList.remove(position);
+            Toast.makeText(mContext, R.string.bd_save_correct, Toast.LENGTH_SHORT).show();
+            notifyItemRemoved(position);
+        } else {
+            Toast.makeText(mContext, R.string.db_save_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

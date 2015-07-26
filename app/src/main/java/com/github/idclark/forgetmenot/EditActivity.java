@@ -125,9 +125,9 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
             task.setNotes(editFragment.getTaskNotes());
             boolean updateSuccess = new TaskTableController(this).updateExistingTask(task);
             if (updateSuccess) {
-                Toast.makeText(this, "Task information was updated.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Unable to update task information.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
             }
 
     } else {
@@ -141,9 +141,9 @@ public class EditActivity extends ActionBarActivity implements DatePickerDialog.
 
             boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
             if (insertSuccess) {
-                Toast.makeText(this, "Task information was saved.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Unable to save task information.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
             }
         }
     }

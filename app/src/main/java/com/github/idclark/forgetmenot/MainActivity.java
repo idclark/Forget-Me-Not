@@ -93,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
                 }
             });
 
-            taskAdapter = new TaskAdapter(new TaskTableController(getActivity()).getAllTasksForUser());
+            taskAdapter = new TaskAdapter(new TaskTableController(getActivity()).getAllTasksForUser(), getActivity());
             return rootView;
         }
 

@@ -11,4 +11,8 @@
     <string name="time_due_hint">Time due...</string>
     <string name="notes_hint">Notes ...</string>
     <string name="task_title_hint">Task...</string>
+    <string name="bd_save_correct">Task information was updated.</string>
+    <string name="db_save_error">Unable to update task information.</string>
+    <string name="task_status_complete">completed</string>
+    <string name="task_status_not_complete">needsAction</string>
 </resources>

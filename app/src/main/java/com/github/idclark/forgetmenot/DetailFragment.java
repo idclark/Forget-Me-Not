@@ -53,7 +53,7 @@ public class DetailFragment extends Fragment {
         mDueDate.setText(detailTask.getDue().toString());
         mCheckBox = (CheckBox) rootView.findViewById(R.id.status);
         detailTask.getStatus();
-        if (detailTask.getStatus().equals("completed")) {
+        if (detailTask.getStatus().equals(getString(R.string.task_status_complete))) {
             mCheckBox.setChecked(true);
         } else
         mCheckBox.setChecked(false);

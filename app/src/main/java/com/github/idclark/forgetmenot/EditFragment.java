@@ -70,8 +70,8 @@ public class EditFragment extends Fragment {
     public String getTaskStatus() {
         mCheckBox = (CheckBox) getActivity().findViewById(R.id.edit_status);
         if (mCheckBox.isChecked()) {
-            return "completed";
-        } else return "needsAction";
+            return getString(R.string.task_status_complete);
+        } else return getString(R.string.task_status_not_complete);
 
     }
 
