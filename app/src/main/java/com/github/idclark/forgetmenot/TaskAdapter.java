@@ -104,7 +104,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         protected TextView mDue;
         protected CheckBox mStatus;
         protected TextView m_ID;
-        protected TextView mDeleteIcon;
 
         public TaskViewHolder(View view) {
             super(view);
@@ -112,7 +111,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             mTitle = (TextView) view.findViewById(R.id.title);
             mDue = (TextView) view.findViewById(R.id.due);
             mStatus = (CheckBox) view.findViewById(R.id.status);
-            mDeleteIcon = (TextView) view.findViewById(R.id.delete_icon);
             view.setOnClickListener(this);
         }
 

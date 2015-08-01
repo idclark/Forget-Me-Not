@@ -23,26 +23,19 @@
     <EditText
         android:id="@+id/task_due_date"
         android:inputType="datetime"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_insert_invitation_black_18dp"
         android:layout_below="@+id/task_title"
-        android:onClick="showDatePickerDialog"
+        android:onClick="launchDateAndTimePickerDialog"
         android:hint="@string/date_due_hint"/>
-
-    <EditText
-        android:id="@+id/time_due"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/task_due_date"
-        android:onClick="showTimePickerDialog"
-        android:hint="@string/time_due_hint"/>
 
     <EditText
         android:id="@+id/task_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/time_due"
+        android:layout_below="@+id/task_due_date"
         android:drawableStart="@drawable/ic_format_align_left_black_18dp"
         android:hint="@string/notes_hint"/>
 
