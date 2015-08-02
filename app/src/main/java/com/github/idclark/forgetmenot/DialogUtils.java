@@ -1,5 +1,6 @@
 package com.github.idclark.forgetmenot;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.design.widget.TabLayout;
@@ -7,11 +8,11 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -20,12 +21,21 @@ import java.util.Calendar;
  * Created by idclark on 8/1/15.
  */
 public class DialogUtils {
-    public static void showDateAndTimeDialog(final Context context) {
+
+    public static Activity editActivity;
+    public static EditText mEditDueDate;
+
+    public DialogUtils(Activity editActivity) {
+        this.editActivity = editActivity;
+    }
+    public void showDateAndTimeDialog(final Context context) {
 
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_date_time,null, false);
         final DatePicker datePicker = (DatePicker) view.findViewById(R.id.date_picker);
         final TimePicker timePicker = (TimePicker) view.findViewById(R.id.time_picker);
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        final Calendar calendar = Calendar.getInstance();
+        mEditDueDate = (EditText) editActivity.findViewById(R.id.task_due_date);
         viewPager.setAdapter(new PagerAdapter() {
 
             @Override
@@ -73,14 +83,13 @@ public class DialogUtils {
 
                 dateAndTimeDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
                         new View.OnClickListener() {
-                            @Override
+
                             public void onClick(View v) {
                                 if (viewPager.getCurrentItem() == 0) {
                                     viewPager.setCurrentItem(1);
                                     return;
                                 }
 
-                                Calendar calendar = Calendar.getInstance();
                                 calendar.set(Calendar.MONTH, datePicker.getMonth());
                                 calendar.set(Calendar.DAY_OF_MONTH, datePicker.getDayOfMonth());
                                 calendar.set(Calendar.YEAR, datePicker.getYear());
@@ -90,11 +99,8 @@ public class DialogUtils {
 
                                 // Bitmask used to determine timestamp format
                                 int displayMask = DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR;
-
-                                // Resultant timestamp
-                                String timestamp = DateUtils.formatDateTime(context, calendar.getTimeInMillis(), displayMask);
-                                Log.d(MainActivity.class.getCanonicalName(),
-                                        "Timestamp for Ian: " + timestamp);
+                                String timestamp = DateUtils.formatDateTime(editActivity.getApplicationContext(), calendar.getTimeInMillis(), displayMask);
+                                mEditDueDate.setText(timestamp);
 
                                 // We must dismiss the dialog as we have overriden the default behavior
                                 dialog.dismiss();
@@ -102,6 +108,7 @@ public class DialogUtils {
                         });
             }
         });
+
         dateAndTimeDialog.show();
 
     }

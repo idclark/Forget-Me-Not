@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
 
+import java.util.Calendar;
+
 public class EditActivity extends ActionBarActivity {
 
     public static String EXTRA_TITLE = "com.github.idclark.TITLE";
@@ -21,6 +23,8 @@ public class EditActivity extends ActionBarActivity {
     public static String EXTRA_ID = "com.github.idclark.ID";
 
     private EditText mEditDueDate;
+    private int displayMask;
+    private Calendar cal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,8 @@ public class EditActivity extends ActionBarActivity {
             editFragment.setmTaskNotes(data.getString(EXTRA_NOTES));
             editFragment.setmDueDate(data.getString(EXTRA_DUE));
         }
-        mEditDueDate = ((EditText) findViewById(R.id.task_due_date));
+
+        mEditDueDate = (EditText) findViewById(R.id.task_due_date);
         mEditDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +49,6 @@ public class EditActivity extends ActionBarActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,20 +79,9 @@ public class EditActivity extends ActionBarActivity {
        }
     }
 
-//    @Override
-//    public void onDateSet(DatePicker view, int year, int month, int day) {
-//        //do some stuff for example write on log and update TextField on activity
-//        String myFormat = "MM/dd/yy"; //In which you need put here
-//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(year, month, day);
-//        ((EditText) findViewById(R.id.task_due_date)).setText(sdf.format(calendar.getTime()));
-//    }
-
-
-
     public void launchDateAndTimePicker(View view) {
-        DialogUtils.showDateAndTimeDialog(this);
+        DialogUtils utils = new DialogUtils(this);
+       utils.showDateAndTimeDialog(this);
     }
 
     /**
