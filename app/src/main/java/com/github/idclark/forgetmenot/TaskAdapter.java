@@ -12,12 +12,8 @@ import android.widget.Toast;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by idclark on 5/13/15.
@@ -85,17 +81,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public interface OnItemClickListener {
         void onItemClick(View view , int position);
-    }
-
-    private String formatDueDate(String queryResponse) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z", Locale.US);
-        Date result = new Date();
-        try {
-            result = sdf.parse(queryResponse);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return result.toString();
     }
 
     public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

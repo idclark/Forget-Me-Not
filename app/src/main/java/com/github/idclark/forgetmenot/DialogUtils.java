@@ -22,7 +22,7 @@ import java.util.Calendar;
  */
 public class DialogUtils {
 
-    public static Activity editActivity;
+    public Activity editActivity;
     public static EditText mEditDueDate;
 
     public DialogUtils(Activity editActivity) {

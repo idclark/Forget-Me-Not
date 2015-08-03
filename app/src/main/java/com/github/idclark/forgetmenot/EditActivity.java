@@ -12,8 +12,6 @@ import android.widget.Toast;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
 
-import java.util.Calendar;
-
 public class EditActivity extends ActionBarActivity {
 
     public static String EXTRA_TITLE = "com.github.idclark.TITLE";
@@ -21,10 +19,6 @@ public class EditActivity extends ActionBarActivity {
     public static String EXTRA_NOTES = "com.github.idclark.NOTES";
     public static String EXTRA_STATUS = "com.github.idclark.STATUS";
     public static String EXTRA_ID = "com.github.idclark.ID";
-
-    private EditText mEditDueDate;
-    private int displayMask;
-    private Calendar cal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +35,7 @@ public class EditActivity extends ActionBarActivity {
             editFragment.setmDueDate(data.getString(EXTRA_DUE));
         }
 
-        mEditDueDate = (EditText) findViewById(R.id.task_due_date);
+        EditText mEditDueDate = (EditText) findViewById(R.id.task_due_date);
         mEditDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +75,7 @@ public class EditActivity extends ActionBarActivity {
 
     public void launchDateAndTimePicker(View view) {
         DialogUtils utils = new DialogUtils(this);
-       utils.showDateAndTimeDialog(this);
+        utils.showDateAndTimeDialog(this);
     }
 
     /**

@@ -49,8 +49,10 @@
         android:id="@+id/date_string"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/due_date_header"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:text="Jan 7 2007, 12:34 PM"
+        android:layout_below="@+id/edit_button"
+        android:layout_toEndOf="@+id/due_date_header" />
 
     <View
         android:id="@+id/border_2"
