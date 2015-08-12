@@ -14,7 +14,6 @@ import com.google.api.services.tasks.model.Task;
 
 import java.util.Collections;
 import java.util.List;
-
 /**
  * Created by idclark on 5/13/15.
  */
@@ -37,10 +36,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(final TaskViewHolder taskViewHolder, int i) {
+        DateTimeUtils utils = new DateTimeUtils(mContext);
         final Task task = taskList.get(i);
         taskViewHolder.m_ID.setText(task.getId());
         taskViewHolder.mTitle.setText(task.getTitle());
-        taskViewHolder.mDue.setText(task.getDue().toString());
+        taskViewHolder.mDue.setText((utils.formatDueDate(task.getDue().toString())));
+        //TODO this doesn't seem to work
         if (task.getStatus().equals("complete")) {
             taskViewHolder.mStatus.setChecked(true);
         } else taskViewHolder.mStatus.setChecked(false);
@@ -62,10 +63,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         boolean deleteSuccess = new TaskTableController(mContext).deletTaskByID(id);
         if (deleteSuccess) {
             taskList.remove(position);
-            Toast.makeText(mContext, R.string.bd_save_correct, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.db_delete_success, Toast.LENGTH_SHORT).show();
             notifyItemRemoved(position);
         } else {
-            Toast.makeText(mContext, R.string.db_save_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.db_delete_fail, Toast.LENGTH_SHORT).show();
         }
     }
 

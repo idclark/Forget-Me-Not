@@ -13,8 +13,6 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
 
-import static com.github.idclark.forgetmenot.DateTimeUtils.formatDueDate;
-
 
 /**
  * A placeholder fragment containing a simple view.
@@ -34,12 +32,15 @@ public class DetailFragment extends Fragment {
     CheckBox mCheckBox;
 
 
+
     public DetailFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        DateTimeUtils utils = new DateTimeUtils(getActivity().getApplicationContext());
 
         TaskTableController controller = new TaskTableController(getActivity());
         final String taskID = getArguments().getString("TASK_ID");
@@ -52,7 +53,7 @@ public class DetailFragment extends Fragment {
         mNotesView = (TextView) rootView.findViewById(R.id.notes);
         mNotesView.setText(detailTask.getNotes());
         mDueDate = (TextView) rootView.findViewById(R.id.date_string);
-        mDueDate.setText(formatDueDate(detailTask.getDue().toString()));
+        mDueDate.setText(utils.formatDueDate(detailTask.getDue().toString()));
         mCheckBox = (CheckBox) rootView.findViewById(R.id.status);
         detailTask.getStatus();
         if (detailTask.getStatus().equals(getString(R.string.task_status_complete))) {

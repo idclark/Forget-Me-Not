@@ -16,8 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.github.idclark.forgetmenot.DateTimeUtils.formatDueDate;
-
 
 /**
  * A placeholder fragment containing a simple view.
@@ -60,8 +58,9 @@ public class EditFragment extends Fragment {
     }
 
     public void setmDueDate(String dueDate) {
+        DateTimeUtils utils = new DateTimeUtils(getActivity().getApplicationContext());
         mDueDate = (EditText) getActivity().findViewById(R.id.task_due_date);
-        mDueDate.setText(formatDueDate(dueDate));
+        mDueDate.setText(utils.formatDueDate(dueDate));
     }
 
     public String getTaskID() {
