@@ -3,12 +3,11 @@ package com.github.idclark.forgetmenot;
 import android.content.Context;
 import android.util.Log;
 
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Created by idclark on 8/2/15.
@@ -36,8 +35,7 @@ public class DateTimeUtils {
         flags |= android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
         flags |= android.text.format.DateUtils.FORMAT_SHOW_YEAR;
 
-       return android.text.format.DateUtils.formatDateTime(mContext,
-                when + TimeZone.getDefault().getOffset(when), flags);
+       return android.text.format.DateUtils.formatDateTime(mContext, when, flags);
 
     }
 }

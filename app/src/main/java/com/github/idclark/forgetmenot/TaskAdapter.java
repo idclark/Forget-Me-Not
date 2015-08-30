@@ -41,7 +41,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         taskViewHolder.m_ID.setText(task.getId());
         taskViewHolder.mTitle.setText(task.getTitle());
         taskViewHolder.mDue.setText((utils.formatDueDate(task.getDue().toString())));
-        //TODO this doesn't seem to work
         if (task.getStatus().equals("completed")) {
             taskViewHolder.mStatus.setChecked(true);
         } else taskViewHolder.mStatus.setChecked(false);

@@ -2,7 +2,7 @@ package com.github.idclark.forgetmenot;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
 
-public class EditActivity extends ActionBarActivity {
+public class EditActivity extends AppCompatActivity {
 
     public static String EXTRA_TITLE = "com.github.idclark.TITLE";
     public static String EXTRA_DUE = "com.github.idclark.DUE";
