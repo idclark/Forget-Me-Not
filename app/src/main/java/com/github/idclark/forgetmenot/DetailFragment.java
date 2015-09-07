@@ -47,7 +47,7 @@ public class DetailFragment extends Fragment {
         Task detailTask = controller.getTaskByID(taskID);
         detailTask.getId();
         detailTask.getTitle();
-        View rootView = inflater.inflate(R.layout.task_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         mTitleView = (TextView) rootView.findViewById(R.id.title);
         mTitleView.setText(detailTask.getTitle());
         mNotesView = (TextView) rootView.findViewById(R.id.notes);

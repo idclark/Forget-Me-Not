@@ -17,4 +17,6 @@
     <string name="task_status_not_complete">needsAction</string>
     <string name="db_delete_success">Task was deleted Successfully</string>
     <string name="db_delete_fail">Unable to delete task</string>
+    <string name="edit_save">SAVE</string>
+    <string name="edit_cancel">X</string>
 </resources>

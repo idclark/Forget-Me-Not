@@ -4,13 +4,13 @@
     tools:context="com.github.idclark.forgetmenot.EditFragment">
     <item
         android:id="@+id/action_save"
-        android:title="SAVE"
+        android:title="@string/edit_save"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/action_delete"
-        android:title="X"
+        android:title="@string/edit_cancel"
         app:showAsAction="always"
         />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"

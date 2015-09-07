@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
+        Toolbar toolbar;
         Activity mActivity;
         RecyclerView mRecyclerView;
         TaskAdapter taskAdapter;
@@ -73,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            toolbar = (Toolbar) rootView.findViewById(R.id.tool_bar);
+            ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+
             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardList);
             mFabView = (AddFloatingActionButton) rootView.findViewById(R.id.normal_plus);
 
