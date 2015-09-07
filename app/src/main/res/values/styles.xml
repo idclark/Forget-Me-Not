@@ -1,12 +1,8 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="actionBarStyle">@style/ActionBar</item>
-        <item name="android:windowActionBar">true</item>
-    </style>
-
-    <style name="ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
-        <item name="background">@color/light_blue_menu_bar</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 </resources>
 

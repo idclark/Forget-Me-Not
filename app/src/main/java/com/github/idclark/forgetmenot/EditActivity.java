@@ -2,11 +2,12 @@ package com.github.idclark.forgetmenot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
@@ -19,10 +20,13 @@ public class EditActivity extends AppCompatActivity {
     public static String EXTRA_STATUS = "com.github.idclark.STATUS";
     public static String EXTRA_ID = "com.github.idclark.ID";
 
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
         EditFragment editFragment = (EditFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.edit_fragment);
         Bundle data = getIntent().getExtras();
@@ -90,9 +94,11 @@ public class EditActivity extends AppCompatActivity {
             task.setNotes(editFragment.getTaskNotes());
             boolean updateSuccess = new TaskTableController(this).updateExistingTask(task);
             if (updateSuccess) {
-                Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.bd_save_correct), Snackbar.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error), Snackbar.LENGTH_SHORT).show();
             }
 
     } else {
@@ -106,9 +112,11 @@ public class EditActivity extends AppCompatActivity {
 
             boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
             if (insertSuccess) {
-                Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.bd_save_correct), Snackbar.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error), Snackbar.LENGTH_SHORT);
             }
         }
     }
