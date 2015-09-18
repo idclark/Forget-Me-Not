@@ -3,6 +3,7 @@ package com.github.idclark.forgetmenot;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class DetailFragment extends Fragment {
     TextView mNotesView;
     TextView mDueDate;
     CheckBox mCheckBox;
+    Toolbar toolbar;
 
 
 
@@ -50,6 +52,8 @@ public class DetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         mTitleView = (TextView) rootView.findViewById(R.id.title);
         mTitleView.setText(detailTask.getTitle());
+        toolbar = (Toolbar) getActivity().findViewById(R.id.tool_bar);
+        toolbar.setTitle(detailTask.getTitle());
         mNotesView = (TextView) rootView.findViewById(R.id.notes);
         mNotesView.setText(detailTask.getNotes());
         mDueDate = (TextView) rootView.findViewById(R.id.date_string);

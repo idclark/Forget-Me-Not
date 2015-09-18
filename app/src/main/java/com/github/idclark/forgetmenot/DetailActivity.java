@@ -13,10 +13,13 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO this a horrible brute force way to set toolbar title to task title
+        String title = getIntent().getExtras().get("TASK_TITLE").toString();
         setContentView(R.layout.activity_detail);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(title);
 
         if (savedInstanceState == null) {
             DetailFragment detailFragment = new DetailFragment();

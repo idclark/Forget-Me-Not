@@ -62,7 +62,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         boolean deleteSuccess = new TaskTableController(mContext).deletTaskByID(id);
         if (deleteSuccess) {
             taskList.remove(position);
-            Toast.makeText(mContext, R.string.db_delete_success, Toast.LENGTH_SHORT).show();
+           Toast.makeText(mContext, R.string.db_delete_success, Toast.LENGTH_SHORT).show();
+            //TODO refactor to Snackbars
+            //Snackbar.make(, R.string.db_delete_success, Snackbar.LENGTH_SHORT).show();
             notifyItemRemoved(position);
         } else {
             Toast.makeText(mContext, R.string.db_delete_fail, Toast.LENGTH_SHORT).show();

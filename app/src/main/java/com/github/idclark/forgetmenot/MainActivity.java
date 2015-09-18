@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         TaskAdapter taskAdapter;
         AddFloatingActionButton mFabView;
         TextView m_ID;
+        TextView mTitle;
 
         public PlaceholderFragment() {
         }
@@ -106,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(View v, int position) {
                     m_ID = (TextView) v.findViewById(R.id._task_id);
+                    mTitle = (TextView) v.findViewById(R.id.title);
                     Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
                     detailIntent.putExtra("TASK_ID", m_ID.getText().toString());
+                    detailIntent.putExtra("TASK_TITLE", mTitle.getText().toString());
                     startActivity(detailIntent);
                 }
             });
