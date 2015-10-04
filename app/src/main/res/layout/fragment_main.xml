@@ -1,3 +1,7 @@
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
@@ -16,15 +20,13 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/tool_bar"/>
 
-    <com.getbase.floatingactionbutton.AddFloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/normal_plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|right"
-        fab:fab_plusIconColor="@color/half_black"
-        fab:fab_colorNormal="@color/pink"
-        fab:fab_colorPressed="@color/pink_pressed"
+        android:src="@drawable/ic_add_white_18dp"
         android:layout_alignParentStart="false"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
@@ -32,3 +34,4 @@
         android:layout_marginRight="16dp" />
 
 </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

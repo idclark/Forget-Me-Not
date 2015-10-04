@@ -3,6 +3,7 @@ package com.github.idclark.forgetmenot;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Activity mActivity;
         RecyclerView mRecyclerView;
         TaskAdapter taskAdapter;
-        AddFloatingActionButton mFabView;
+        FloatingActionButton mFabView;
         TextView m_ID;
         TextView mTitle;
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardList);
-            mFabView = (AddFloatingActionButton) rootView.findViewById(R.id.normal_plus);
+            mFabView = (FloatingActionButton) rootView.findViewById(R.id.normal_plus);
 
             mFabView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(taskAdapter);
+            ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(taskAdapter, mRecyclerView);
             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
             itemTouchHelper.attachToRecyclerView(mRecyclerView);
         }

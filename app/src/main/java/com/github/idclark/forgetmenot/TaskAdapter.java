@@ -1,6 +1,7 @@
 package com.github.idclark.forgetmenot;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,15 +57,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     @Override
-    public void onItemDismiss(int position) {
+    public void onItemDismiss(int position, RecyclerView recyclerView) {
         Task task = taskList.get(position);
         String id = task.getId();
         boolean deleteSuccess = new TaskTableController(mContext).deletTaskByID(id);
         if (deleteSuccess) {
             taskList.remove(position);
-           Toast.makeText(mContext, R.string.db_delete_success, Toast.LENGTH_SHORT).show();
-            //TODO refactor to Snackbars
-            //Snackbar.make(, R.string.db_delete_success, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(recyclerView, R.string.db_delete_success, Snackbar.LENGTH_LONG).show();
             notifyItemRemoved(position);
         } else {
             Toast.makeText(mContext, R.string.db_delete_fail, Toast.LENGTH_SHORT).show();
