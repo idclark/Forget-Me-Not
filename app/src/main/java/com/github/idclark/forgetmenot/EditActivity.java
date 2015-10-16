@@ -62,7 +62,7 @@ public class EditActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
        switch (item.getItemId()) {
            case R.id.action_settings:
-               return true;
+               return false;
            case R.id.action_save:
                EditFragment editFragment = (EditFragment)getSupportFragmentManager()
                        .findFragmentById(R.id.edit_fragment);
@@ -103,7 +103,7 @@ public class EditActivity extends AppCompatActivity {
             boolean updateSuccess = new TaskTableController(this).updateExistingTask(task);
             if (updateSuccess) {
                 //Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
-                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.bd_save_correct), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_correct), Snackbar.LENGTH_LONG).show();
             } else {
                 //Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
                 Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error), Snackbar.LENGTH_LONG).show();
@@ -121,7 +121,7 @@ public class EditActivity extends AppCompatActivity {
             boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
             if (insertSuccess) {
                 //Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
-                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.bd_save_correct), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_correct), Snackbar.LENGTH_LONG).show();
             } else {
                 //Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
                 Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error), Snackbar.LENGTH_LONG);
