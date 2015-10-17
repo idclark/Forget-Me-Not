@@ -2,6 +2,7 @@ package com.github.idclark.forgetmenot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.services.tasks.model.Task;
 
@@ -32,8 +32,6 @@ public class DetailFragment extends Fragment {
     TextView mDueDate;
     CheckBox mCheckBox;
     Toolbar toolbar;
-
-
 
     public DetailFragment() {
     }
@@ -85,5 +83,4 @@ public class DetailFragment extends Fragment {
         });
         return rootView;
     }
-
 }

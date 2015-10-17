@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/relativelayout">
 
    <CheckBox
        android:layout_width="wrap_content"
@@ -23,23 +30,24 @@
         android:textSize="20sp"
         android:layout_toEndOf="@+id/status"/>
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/edit_button"
-        fab:fab_size="mini"
-        android:paddingTop="-10dp"
+        fab:fabSize="mini"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:fab_icon="@drawable/ic_edit_black_48dp"
-        fab:fab_colorNormal="@color/white"
-        android:layout_toEndOf="@+id/title" />
-
+        android:src="@drawable/ic_edit_black_48dp"
+        fab:backgroundTint="@color/white"
+        android:layout_gravity="top|end"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
 
     <TextView
         android:id="@+id/due_date_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="30dp"
-        android:paddingBottom="10dp"
         android:drawableStart="@drawable/ic_insert_invitation_black_18dp"
         android:text="Due Date: "
         android:layout_below="@+id/title"
@@ -51,7 +59,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="Jan 7 2007, 12:34 PM"
-        android:layout_below="@+id/edit_button"
+        android:layout_above="@+id/border_2"
         android:layout_toEndOf="@+id/due_date_header" />
 
     <View
@@ -73,3 +81,4 @@
         android:textSize="20dp" />
 
 </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

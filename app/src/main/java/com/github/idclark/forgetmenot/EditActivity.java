@@ -101,13 +101,7 @@ public class EditActivity extends AppCompatActivity {
             task.setDue(editFragment.getTaskDueDate());
             task.setNotes(editFragment.getTaskNotes());
             boolean updateSuccess = new TaskTableController(this).updateExistingTask(task);
-            if (updateSuccess) {
-                //Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
-                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_correct), Snackbar.LENGTH_LONG).show();
-            } else {
-                //Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
-                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error), Snackbar.LENGTH_LONG).show();
-            }
+            showSnackBarForDatabaseTransaction(updateSuccess);
 
     } else {
             //TODO this is horribles and only for test
@@ -119,13 +113,17 @@ public class EditActivity extends AppCompatActivity {
             task.setNotes(editFragment.getTaskNotes());
 
             boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
-            if (insertSuccess) {
-                //Toast.makeText(this, getString(R.string.bd_save_correct), Toast.LENGTH_SHORT).show();
-                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_correct), Snackbar.LENGTH_LONG).show();
-            } else {
-                //Toast.makeText(this, getString(R.string.db_save_error), Toast.LENGTH_SHORT).show();
-                Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error), Snackbar.LENGTH_LONG);
-            }
+            showSnackBarForDatabaseTransaction(insertSuccess);
+        }
+    }
+
+    private void showSnackBarForDatabaseTransaction(Boolean status) {
+        if (status) {
+            Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_correct),
+                    Snackbar.LENGTH_LONG).show();
+        } else {
+            Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error),
+                    Snackbar.LENGTH_LONG).show();
         }
     }
 }
