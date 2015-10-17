@@ -56,4 +56,21 @@
         android:hint="@string/notes_hint"/>
     </android.support.design.widget.TextInputLayout>
 
+    <View
+        android:id="@+id/border_2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"
+        android:layout_above="@+id/delete_task"/>
+
+    <TextView
+        android:id="@+id/delete_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_task"
+        android:paddingTop="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+/>
+
 </RelativeLayout>

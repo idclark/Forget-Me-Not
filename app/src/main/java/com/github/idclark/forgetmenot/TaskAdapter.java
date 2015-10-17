@@ -15,6 +15,7 @@ import com.google.api.services.tasks.model.Task;
 
 import java.util.Collections;
 import java.util.List;
+
 /**
  * Created by idclark on 5/13/15.
  */
@@ -57,13 +58,21 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     @Override
-    public void onItemDismiss(int position, RecyclerView recyclerView) {
-        Task task = taskList.get(position);
+    public void onItemDismiss(final int position, RecyclerView recyclerView) {
+        final Task task = taskList.get(position);
         String id = task.getId();
         boolean deleteSuccess = new TaskTableController(mContext).deletTaskByID(id);
         if (deleteSuccess) {
             taskList.remove(position);
-            Snackbar.make(recyclerView, R.string.db_delete_success, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(recyclerView, R.string.db_delete_success, Snackbar.LENGTH_LONG)
+                    .setAction("UNDO", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Boolean status = new TaskTableController(mContext).insertNewRow(task);
+                            taskList.add(task);
+                            notifyItemInserted(position);
+                        }
+                    }).show();
             notifyItemRemoved(position);
         } else {
             Toast.makeText(mContext, R.string.db_delete_fail, Toast.LENGTH_SHORT).show();
