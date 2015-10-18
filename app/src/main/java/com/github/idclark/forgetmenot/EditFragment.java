@@ -1,6 +1,8 @@
 package com.github.idclark.forgetmenot;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.github.idclark.forgetmenot.data.TaskTableController;
 import com.google.api.client.util.DateTime;
+import com.google.api.services.tasks.model.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,13 +25,14 @@ import java.util.Locale;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class EditFragment extends Fragment {
+public class EditFragment extends Fragment implements View.OnClickListener {
 
     CheckBox mCheckBox;
     EditText mTitleText;
     EditText mDueDate;
     EditText mTaskNotes;
     String taskID;
+    TextView mDeleteText;
 
     public EditFragment() {
     }
@@ -34,7 +40,37 @@ public class EditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit, container, false);
+        mDeleteText = (TextView) view.findViewById(R.id.delete_task);
+        mDeleteText.setOnClickListener(this);
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        String id = getTaskID();
+        new TaskTableController(getActivity()).deletTaskByID(id);
+        Snackbar.make(view, R.string.db_delete_success, Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Task task = new Task();
+                        if (getTaskID() != null) {
+                            task.setId(getTaskID());
+                        } else {
+                            task.setId("TaskId" + Math.random());
+                        }
+                        task.setStatus(getTaskStatus());
+                        task.setTitle(getTitleText());
+                        task.setDue(getTaskDueDate());
+                        task.setNotes(getTaskNotes());
+                        new TaskTableController(getActivity()).insertNewRow(task);
+                        startActivity(new Intent(getActivity(), MainActivity.class));
+                    }
+                })
+                //.setCallback
+                .show();
+                //startActivity(new Intent(getActivity(), MainActivity.class));
     }
 
     public void setTaskID(String id) {
