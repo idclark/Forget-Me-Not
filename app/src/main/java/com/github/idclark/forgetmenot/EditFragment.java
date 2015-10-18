@@ -68,9 +68,13 @@ public class EditFragment extends Fragment implements View.OnClickListener {
                         startActivity(new Intent(getActivity(), MainActivity.class));
                     }
                 })
-                //.setCallback
+                .setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        startActivity(new Intent(getActivity(), MainActivity.class));
+                    }
+                })
                 .show();
-                //startActivity(new Intent(getActivity(), MainActivity.class));
     }
 
     public void setTaskID(String id) {

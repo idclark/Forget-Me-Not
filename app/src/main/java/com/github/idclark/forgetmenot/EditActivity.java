@@ -67,7 +67,6 @@ public class EditActivity extends AppCompatActivity {
                EditFragment editFragment = (EditFragment)getSupportFragmentManager()
                        .findFragmentById(R.id.edit_fragment);
                createOrUpdateTask(editFragment);
-               startActivity(new Intent(this, MainActivity.class));
                return true;
            case R.id.action_delete:
                startActivity(new Intent(this, MainActivity.class));
@@ -111,7 +110,6 @@ public class EditActivity extends AppCompatActivity {
             //TODO this breaks with an existing datetime string, mm/dd/yyyy HH:mm:sss z
             task.setDue(editFragment.getTaskDueDate());
             task.setNotes(editFragment.getTaskNotes());
-
             boolean insertSuccess = new TaskTableController(this).insertNewRow(task);
             showSnackBarForDatabaseTransaction(insertSuccess);
         }
@@ -120,7 +118,14 @@ public class EditActivity extends AppCompatActivity {
     private void showSnackBarForDatabaseTransaction(Boolean status) {
         if (status) {
             Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_correct),
-                    Snackbar.LENGTH_LONG).show();
+                    Snackbar.LENGTH_SHORT)
+                    .setCallback(new Snackbar.Callback() {
+                        @Override
+                        public void onDismissed(Snackbar snackbar, int event) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }
+                    })
+                    .show();
         } else {
             Snackbar.make(findViewById(R.id.edit_fragment), getString(R.string.db_save_error),
                     Snackbar.LENGTH_LONG).show();
