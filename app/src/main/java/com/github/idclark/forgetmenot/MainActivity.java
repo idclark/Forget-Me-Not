@@ -19,15 +19,19 @@ import android.widget.TextView;
 
 import com.github.idclark.forgetmenot.data.TaskTableController;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    @Bind(R.id.tool_bar) Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
@@ -58,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
     public static class PlaceholderFragment extends Fragment {
 
         Activity mActivity;
-        RecyclerView mRecyclerView;
         TaskAdapter taskAdapter;
-        FloatingActionButton mFabView;
-        TextView m_ID;
-        TextView mTitle;
+        @Bind(R.id.cardList) RecyclerView mRecyclerView;
+        @Bind(R.id.normal_plus) FloatingActionButton mFabView;
+        @Bind(R.id._task_id) TextView m_ID;
+        @Bind(R.id.title) TextView mTitle;
 
         public PlaceholderFragment() {
         }
@@ -79,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.cardList);
-            mFabView = (FloatingActionButton) rootView.findViewById(R.id.normal_plus);
+            ButterKnife.bind(this, rootView);
 
             mFabView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onItemClick(View v, int position) {
-                    m_ID = (TextView) v.findViewById(R.id._task_id);
-                    mTitle = (TextView) v.findViewById(R.id.title);
+                   ButterKnife.bind(this, v);
                     Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
                     detailIntent.putExtra("TASK_ID", m_ID.getText().toString());
                     detailIntent.putExtra("TASK_TITLE", mTitle.getText().toString());
