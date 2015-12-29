@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.tool_bar) Toolbar toolbar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+            ButterKnife.bind(this, view);
             mRecyclerView.setAdapter(taskAdapter);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onItemClick(View v, int position) {
-                   ButterKnife.bind(this, v);
+                    ButterKnife.bind(this, v);
                     Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
                     detailIntent.putExtra("TASK_ID", m_ID.getText().toString());
                     detailIntent.putExtra("TASK_TITLE", mTitle.getText().toString());
