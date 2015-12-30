@@ -15,12 +15,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.github.idclark.forgetmenot.data.TaskTableController;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -64,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
         TaskAdapter taskAdapter;
         @Bind(R.id.cardList) RecyclerView mRecyclerView;
         @Bind(R.id.normal_plus) FloatingActionButton mFabView;
-        @Bind(R.id._task_id) TextView m_ID;
-        @Bind(R.id.title) TextView mTitle;
 
         public PlaceholderFragment() {
         }
@@ -100,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            ButterKnife.bind(this, view);
             mRecyclerView.setAdapter(taskAdapter);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -108,11 +105,12 @@ public class MainActivity extends AppCompatActivity {
             taskAdapter.SetOnItemClickListener(new TaskAdapter.OnItemClickListener() {
 
                 @Override
+                @OnClick({R.id._task_id, R.id.title})
                 public void onItemClick(View v, int position) {
-                    ButterKnife.bind(this, v);
+                    cardView view = (cardView) v;
                     Intent detailIntent = new Intent(v.getContext(), DetailActivity.class);
-                    detailIntent.putExtra("TASK_ID", m_ID.getText().toString());
-                    detailIntent.putExtra("TASK_TITLE", mTitle.getText().toString());
+                    detailIntent.putExtra("TASK_ID", cardview .m_ID.getText().toString());
+                    detailIntent.putExtra("TASK_TITLE", cardview .mTitle.getText().toString());
                     startActivity(detailIntent);
                 }
             });

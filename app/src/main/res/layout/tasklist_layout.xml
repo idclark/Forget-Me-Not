@@ -12,19 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/_task_id"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/status" />
+        <include android:id="@+id/custom_id"
+            layout="@layout/custom_id_cardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </include>
 
         <TextView
             android:id="@+id/due"
@@ -32,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:paddingTop="0dp"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/custom_id"
             android:layout_alignParentStart="true"
             android:paddingLeft="16dp" />
         <CheckBox

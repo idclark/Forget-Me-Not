@@ -16,9 +16,6 @@ import com.google.api.services.tasks.model.Task;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
  * Created by idclark on 5/13/15.
  */
@@ -98,21 +95,24 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @Bind(R.id.title) protected TextView mTitle;
-        @Bind(R.id.due) protected TextView mDue;
-        @Bind(R.id.status) protected CheckBox mStatus;
-        @Bind(R.id._task_id) protected TextView m_ID;
+        protected TextView mTitle;
+        protected TextView mDue;
+        protected CheckBox mStatus;
+        protected TextView m_ID;
 
         public TaskViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            m_ID = (TextView) view.findViewById(R.id._task_id);
+            mTitle = (TextView) view.findViewById(R.id.title);
+            mDue = (TextView) view.findViewById(R.id.due);
+            mStatus = (CheckBox) view.findViewById(R.id.status);
             view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(v, getAdapterPosition());
+                mItemClickListener.onItemClick(v, getPosition());
             }
         }
 
